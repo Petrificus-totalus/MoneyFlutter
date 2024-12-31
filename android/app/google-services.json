@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "822547938697",
+    "project_id": "money-c63dd",
+    "storage_bucket": "money-c63dd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822547938697:android:b538044a438ae4838ff558",
+        "android_client_info": {
+          "package_name": "com.probiotics.money"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "822547938697-733mc5k5ge7iha443be5a3l34d5pfbvb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.probiotics.money",
+            "certificate_hash": "82e20f14db91b44b8aa9e989e43536922ab2eb7d"
+          }
+        },
+        {
+          "client_id": "822547938697-rpilm6hq97pd1hnelnoh7ihd7brgp16s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD29dnV6m4jDlFi2cqqgY9qZdNqPZjOOpw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "822547938697-rpilm6hq97pd1hnelnoh7ihd7brgp16s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
