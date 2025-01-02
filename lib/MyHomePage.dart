@@ -8,9 +8,9 @@ import 'ChartPage.dart';
 import 'LedgerPage.dart';
 
 class MyHomePage extends StatefulWidget {
-  final String title;
 
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -40,7 +40,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),

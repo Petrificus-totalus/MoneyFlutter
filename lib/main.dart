@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
 
     if (user != null) {
       // 用户已登录，跳转到首页
-      return MyHomePage(title: 'Welcome!');
+      return MyHomePage();
     } else {
       // 用户未登录，跳转到登录页面
       return const LoginPage();

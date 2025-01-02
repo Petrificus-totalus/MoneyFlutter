@@ -36,6 +36,8 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
   List<File> _selectedImages = [];
   bool _isUploading = false;
+  bool _isIncome = false; // 默认选项为支出
+
 
   @override
   void initState() {
@@ -137,10 +139,16 @@ class _AddExpensePageState extends State<AddExpensePage> {
       return;
     }
 
+    // 将金额转换为正负值
+    final double finalAmount = _isIncome
+        ? double.parse(amount) // 收入保持正值
+        : -double.parse(amount); // 支出转换为负值
+
+    print(finalAmount);
     final expenseData = {
       'userId': currentUser.uid,
       'date': date,
-      'amount': double.parse(amount),
+      'amount': finalAmount,
       'location': location,
       'categories': _selectedCategories,
       'summary': summary,
@@ -191,6 +199,34 @@ class _AddExpensePageState extends State<AddExpensePage> {
                 ),
               ),
               const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: RadioListTile<bool>(
+                      title: const Text('Expense'),
+                      value: false,
+                      groupValue: _isIncome,
+                      onChanged: (value) {
+                        setState(() {
+                          _isIncome = value!;
+                        });
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: RadioListTile<bool>(
+                      title: const Text('Income'),
+                      value: true,
+                      groupValue: _isIncome,
+                      onChanged: (value) {
+                        setState(() {
+                          _isIncome = value!;
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
               // 金额输入
               TextField(
                 controller: _amountController,

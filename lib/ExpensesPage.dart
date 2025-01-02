@@ -95,10 +95,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Expenses'),
-        backgroundColor: Colors.deepPurple,
-      ),
+
       body: NotificationListener<ScrollNotification>(
         onNotification: (scrollInfo) {
           if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent &&
@@ -124,8 +121,8 @@ class _ExpensesPageState extends State<ExpensesPage> {
             return Card(
               margin: const EdgeInsets.all(10),
               child: ListTile(
-                title: Text('Date: $date'),
-                subtitle: Text('Total: \$${totalAmount.toStringAsFixed(2)}'),
+                title: Text('$date'),
+                subtitle: Text('${totalAmount.toStringAsFixed(2)}'),
                 onTap: () {
                   Navigator.push(
                     context,

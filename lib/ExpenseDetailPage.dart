@@ -23,7 +23,7 @@ class ExpenseDetailPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Amount: \$${amount.toStringAsFixed(2)}'),
+            Text('Amount: ${amount.toStringAsFixed(2)}'),
             const SizedBox(height: 8),
             Text('Summary: $summary'),
             const SizedBox(height: 8),

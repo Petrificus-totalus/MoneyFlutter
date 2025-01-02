@@ -26,8 +26,8 @@ class ExpenseDetailsPage extends StatelessWidget {
           return Card(
             margin: const EdgeInsets.all(10),
             child: ListTile(
-              title: Text('\$${amount.toStringAsFixed(2)} - $summary'),
-              subtitle: Text('Categories: $categories'),
+              title: Text('${amount.toStringAsFixed(2)} - $summary'),
+              subtitle: Text('$categories'),
               onTap: () {
                 Navigator.push(
                   context,
