@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'LoginPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key}) : super(key: key);
+
+  Future<void> _logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginPage()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +60,18 @@ class DashboardPage extends StatelessWidget {
           Text(
             'Keep up the great work! 🎉',
             style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          // Logout 按钮
+          ElevatedButton(
+            onPressed: () => _logout(context),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.deepPurple, // 按钮背景颜色
+              padding: const EdgeInsets.symmetric(vertical: 16),
+            ),
+            child: const Text(
+              'Logout',
+              style: TextStyle(fontSize: 18, color: Colors.white),
+            ),
           ),
         ],
       ),
