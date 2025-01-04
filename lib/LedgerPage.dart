@@ -43,11 +43,11 @@ class _LedgerPageState extends State<LedgerPage> {
     }
   }
 
-  Future<void> _viewDetails(Map<String, dynamic> ledger, String id) async {
+  Future<void> _viewDetails(String id) async {
     final result = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => LedgerDetailsPage(ledger: ledger, ledgerId: id),
+        builder: (context) => LedgerDetailsPage(ledgerId: id),
       ),
     );
 
@@ -55,6 +55,7 @@ class _LedgerPageState extends State<LedgerPage> {
       setState(() {}); // Refresh the page if the ledger was edited
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -162,8 +163,8 @@ class _LedgerPageState extends State<LedgerPage> {
                         ),
                       ],
                     ),
-                    trailing: Text('\$${amount.toStringAsFixed(2)}'),
-                    onTap: () => _viewDetails(ledger, id),
+                    trailing: Text('${amount.toStringAsFixed(2)}'),
+                    onTap: () => _viewDetails(id),
                   ),
                 ),
               );
