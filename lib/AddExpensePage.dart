@@ -101,6 +101,35 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
     return imageUrls;
   }
+  Future<void> _updateStats(double amount, String date) async {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) return;
+
+    final statsRef = FirebaseFirestore.instance.collection('stats').doc(userId);
+    final statsDoc = await statsRef.get();
+
+    final isNewDay = !statsDoc.exists || !(statsDoc.data()?['trackedDates'] ?? []).contains(date);
+
+    if (!statsDoc.exists) {
+      // 如果统计信息不存在，则初始化
+      await statsRef.set({
+        'totalExpense': amount < 0 ? amount.abs() : 0.0,
+        'totalIncome': amount > 0 ? amount : 0.0,
+        'daysTracked': isNewDay ? 1 : 0,
+        'trackedDates': [date],
+      });
+    } else {
+      // 更新统计信息
+      final stats = statsDoc.data()!;
+      await statsRef.update({
+        'totalExpense': FieldValue.increment(amount < 0 ? amount.abs() : 0.0),
+        'totalIncome': FieldValue.increment(amount > 0 ? amount : 0.0),
+        'daysTracked': isNewDay ? FieldValue.increment(1) : FieldValue.increment(0),
+        'trackedDates': FieldValue.arrayUnion([date]),
+      });
+    }
+  }
+
 
   Future<void> _submitForm() async {
     final String date = _dateController.text.trim();
@@ -144,7 +173,6 @@ class _AddExpensePageState extends State<AddExpensePage> {
         ? double.parse(amount) // 收入保持正值
         : -double.parse(amount); // 支出转换为负值
 
-    print(finalAmount);
     final expenseData = {
       'userId': currentUser.uid,
       'date': date,
@@ -160,6 +188,8 @@ class _AddExpensePageState extends State<AddExpensePage> {
     try {
       await FirebaseFirestore.instance.collection('expenses').add(expenseData);
 
+      // 更新统计信息
+      await _updateStats(finalAmount, date);
       // 提示添加成功
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Expense added successfully")),

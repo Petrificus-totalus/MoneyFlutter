@@ -41,6 +41,8 @@ dependencies:
   intl: ^0.20.1
   image_picker: ^1.1.2
   firebase_storage: ^12.3.7
+  fl_chart: ^0.70.0
+
 
 dev_dependencies:
   flutter_test:
